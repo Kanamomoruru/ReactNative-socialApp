@@ -21,7 +21,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 
-const AppStack = createAppContainer({
+const AppStack = createStackNavigator({
   Home: HomeScreen 
 });
 

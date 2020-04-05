@@ -11,13 +11,25 @@ export default class RegisterScreen extends React.Component {
         errorMessage: null
     };
 
+    handleSignUp = () => {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(userCredentials => {
+          return userCredentials.user.updateProfile({
+            displayName: this.state.name
+          });
+        })
+        .catch(error => this.setState({errorMessage: error.message}));
+    };
+
     render() {
         return (
             <View style={styles.container}>
               <Text style={styles.greeting}>{`Hello！\nSign up to get started.`}</Text>
 
               <View style={styles.errorMessage}>
-                {/* {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text>} */}
+                {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text>}
               </View>
               
               <View style={styles.form}>
@@ -52,13 +64,13 @@ export default class RegisterScreen extends React.Component {
                       ></TextInput>
                   </View>
               </View>
-              <TouchableOpacity style={styles.button} onPress={this.handleLogin} >
-                <Text style={{color: "#FFF", fontWeight: "500"}}>Sign in</Text>
+              <TouchableOpacity style={styles.button} onPress={this.handleSignUp} >
+                <Text style={{color: "#FFF", fontWeight: "500"}}>Sign up</Text>
               </TouchableOpacity>
 
               <TouchableOpacity style={{alignSelf: "center", marginTop: 32}}>
                 <Text style={{color: "#414959", fontSize: 13}}>
-                    New to SocialApp? <Text style={{fontWeight: "500", color: "#E9446A"}}>Sign up</Text>
+                    New to SocialApp? <Text style={{fontWeight: "500", color: "#E9446A"}}>Login</Text>
                 </Text>
               </TouchableOpacity>
             </View>
