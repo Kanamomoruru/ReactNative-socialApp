@@ -26,8 +26,8 @@ const AppStack = createStackNavigator({
 });
 
 const AuthStack = createStackNavigator({
-  Register: RegisterScreen,
-  Login: LoginScreen
+  Login: LoginScreen,
+  Register: RegisterScreen
   
 });
 
