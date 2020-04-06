@@ -1,9 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, StatusBar } from 'react-native';
 
+import {Ionicons} from '@expo/vector-icons'
 import * as firebase from 'firebase'
 
 export default class RegisterScreen extends React.Component {
+    static navigationOptions = {
+      headerShown: false
+    };
+
     state = {
         name:"",
         email: "",
@@ -26,12 +31,38 @@ export default class RegisterScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-              <Text style={styles.greeting}>{`Hello！\nSign up to get started.`}</Text>
+              <StatusBar barStyle="light-content"></StatusBar>
+                <Image
+                    source={require("../assets/header.png")}
+                    style={{marginTop: -30, marginLeft: -50}}
+                ></Image>
+
+                <Image
+                    source={require("../assets/footer.png")}
+                    style={{position: "absolute", bottom: -185, right: -280, opacity: .3}}
+                ></Image>
+
+              <TouchableOpacity style={styles.back} onPress={() => this.props.navigation.goBack()}>
+                <Ionicons name="ios-arrow-round-back" size={32} color="#fff"></Ionicons>
+              </TouchableOpacity>
+
+
+              <View style={{position: "absolute", top: 64, alignItems: "center", width: "100%"}}>
+                <Text style={styles.greeting}>{`Hello！\nSign up to get started.`}</Text>
+                <TouchableOpacity style={styles.avatar}>
+                    <Ionicons 
+                      name="ios-add" 
+                      size={40} 
+                      color="#fff"
+                      style={{marginTop: 6, marginLeft: 2}}
+                    ></Ionicons>
+                </TouchableOpacity>
+              </View>
 
               <View style={styles.errorMessage}>
                 {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text>}
               </View>
-              
+
               <View style={styles.form}>
                   <View>
                       <Text style={styles.inputTitle}>Full Name</Text>
@@ -123,6 +154,25 @@ const styles = StyleSheet.create({
       height: 52,
       alignItems: "center",
       justifyContent: "center"
-
-  }
+  },
+  back: {
+    position: "absolute",
+    top: 40,
+    left: 32,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: "rgba(21, 22, 48, 0.1)",
+    alignItems: "center",
+    justifyContent: "center"
+},
+avatar: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: "#E1E2E6",
+    marginTop: 48,
+    justifyContent: "center",
+    alignItems: "center"
+}
 });

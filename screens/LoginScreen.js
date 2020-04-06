@@ -1,9 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, StatusBar, LayoutAnimation } from 'react-native';
 
 import * as firebase from 'firebase'
 
 export default class LoginScreen extends React.Component {
+    static navigationOptions = {
+        headerShown: false
+    };
+
     state = {
         email: "",
         password: "",
@@ -20,9 +24,25 @@ export default class LoginScreen extends React.Component {
     };
 
     render() {
+        LayoutAnimation.easeInEaseOut();
+        
         return (
             <View style={styles.container}>
-              <Text style={styles.greeting}>{`Hello again.\nWelcome back.`}</Text>
+                <StatusBar barStyle="light-content"></StatusBar>
+                <Image
+                    source={require("../assets/header.png")}
+                    style={{marginTop: -30, marginLeft: -50}}
+                ></Image>
+
+                <Image
+                    source={require("../assets/footer.png")}
+                    style={{position: "absolute", bottom: -185, right: -280, opacity: .3}}
+                ></Image>
+
+                <Image
+                    source={require("../assets/logo.png")}
+                    style={{alignSelf: "center", width: 80, height: 80}}
+                ></Image>   
 
               <View style={styles.errorMessage}>
                 {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text>}
@@ -109,6 +129,5 @@ const styles = StyleSheet.create({
       height: 52,
       alignItems: "center",
       justifyContent: "center"
-
   }
 });
