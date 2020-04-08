@@ -92,8 +92,16 @@ const AppContainer =　createStackNavigator(
         showLabel: false
       }
     }
-  )
-}
+  ),
+    postModal: {
+      screen: PostScreen
+    }
+  },
+  {
+    mode: "modal",
+    headerMode: "none",
+    initialRouteName: "postModal"
+  }
 )
 
 
@@ -107,7 +115,7 @@ export default createAppContainer(
   createSwitchNavigator(
     {
       Loading: LoadingScreen,
-      App: AppStack,
+      App: AppContainer,
       Auth: AuthStack
     },
     {
