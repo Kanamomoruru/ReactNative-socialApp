@@ -1,10 +1,30 @@
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image, TextInput } from 'react-native';
 import { Ionicons } from "@expo/vector-icons"
-
-import * as firebase from 'firebase'
+import Constants from "expo-constants"
+import * as Permissions from "expo-permissions"
+import Fire from '../Fire'
 
 export default class PostScreen extends React.Component {
+  state = {
+    text: "",
+    image: null
+  }
+
+  componentDidMount() {
+    this.getPhotoPermission();
+  }
+
+  getPhotoPermission = async () => {
+    if(Constants.platform.ios) {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+      if(status != "granted") {
+        alert("We need permission to access your camera roll");
+      }
+    }
+  }
+
   render() {
       return (
         <SafeAreaView style={styles.container}>

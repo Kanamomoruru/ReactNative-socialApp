@@ -6,6 +6,27 @@ class Fire {
         firebase.initializeApp(FirebaseKeys);
     }
 
+    addPost = async ({ text, localUri}) => {
+        const remoteUrl = await this.uploadPhotoAsync(localUri);
+
+        return new Promise((res, rej) => {
+            this.firestore
+                .collection("post")
+                .add({
+                    text,
+                    uid: this.uid,
+                    timestamp: this.timestamp,
+                    image: remoteUrl
+                })
+                .then(ref => {
+                    res(ref);
+                })
+                .catch(error => {
+                    rej(error);
+                });
+        });
+    }
+
     uploadPhotoAsync = async uri => {
         const path = `photos/${this.uid}/${Date.now()}.jpg`;
 
@@ -23,6 +44,7 @@ class Fire {
                 },
                 async () => {
                     const url = await upload.snapshot.ref.getDownloadURL();
+                    res(url);
                 }
             );
         });
