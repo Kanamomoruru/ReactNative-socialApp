@@ -14,8 +14,6 @@ import NotificationScreen from './screens/NotificationScreen'
 import PostScreen from './screens/PostScreen'
 import ProfileScreen from './screens/ProfileScreen'
 
-import * as firebase from 'firebase'
-
 const AppContainer =　createStackNavigator(
   {
   default: createBottomTabNavigator(
@@ -42,7 +40,7 @@ const AppContainer =　createStackNavigator(
               color="#E9446A"
               style={{
                 shadowColor: "#E9446A",
-                shadowOffset: {width: 0, height: 0},
+                shadowOffset: {width: 0, height: 10},
                 shadowRadius: 10,
                 shadowOpacity: 0.3
               }}
@@ -66,7 +64,7 @@ const AppContainer =　createStackNavigator(
     {
       defaultNavigationOptions: {
         tabBarOnPress: ({navgation, defaultHandler}) => {
-          if(navgation.state.key === "post"){
+          if(navgation.state.key === "Post"){
             navgation.navigate("postModal")
           } else {
             defaultHandler()
@@ -77,7 +75,8 @@ const AppContainer =　createStackNavigator(
         activeTintColor: "#161F3D",
         inactiveTintColor: "#B8BBC4",
         showLabel: false
-      }
+      },
+      initialRouteName: 'Profile'
     }
   ),
     postModal: {
@@ -86,8 +85,7 @@ const AppContainer =　createStackNavigator(
   },
   {
     mode: "modal",
-    headerMode: "none",
-    initialRouteName: "postModal"
+    headerMode: "none"
   }
 )
 

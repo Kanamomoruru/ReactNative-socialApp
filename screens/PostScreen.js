@@ -6,6 +6,9 @@ import * as Permissions from "expo-permissions"
 import Fire from '../Fire'
 import * as ImagePicker from "expo-image-picker"
 
+const firebase = require("firebase");
+require("firebase/firestore");
+
 export default class PostScreen extends React.Component {
   state = {
     text: "",
@@ -26,6 +29,18 @@ export default class PostScreen extends React.Component {
     }
   };
 
+  handlePost = () => {
+    Fire.shared
+      .addPost({ text: this.state.text.trim(), localUri: this.state.image })
+      .then(ref => {
+        this.setState({ text: '', image: null });
+        this.props.navigation.goBack();
+      })
+      .catch(error => {
+        alert(error);
+      });
+  };
+
   pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -42,10 +57,10 @@ export default class PostScreen extends React.Component {
       return (
         <SafeAreaView style={styles.container}>
            <View style={styles.header}>
-             <TouchableOpacity>
+             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
                 <Ionicons name="md-arrow-back" size={24} color="#D8D9DB"></Ionicons>
              </TouchableOpacity>
-             <TouchableOpacity>
+             <TouchableOpacity onPress={this.handlePost}>
                 <Text style={{fontWeight: "800"}}>Post</Text>
              </TouchableOpacity>
             
@@ -58,7 +73,8 @@ export default class PostScreen extends React.Component {
               numberOfLines={4}
               style={{ flex: 1 }}
               placeholder="Want to share something?"
-            
+              onChangeText={text => this.setState({ text })}
+              value={this.state.text}
             ></TextInput>
           </View>
 
