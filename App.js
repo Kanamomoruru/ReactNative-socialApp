@@ -21,13 +21,17 @@ const AppContainer =　createStackNavigator(
       Home: {
         screen: HomeScreen,
         navigationOptions: {
-          tabBarIcon: ({ tintColor }) => <Ionicons name="ios-home" size={24} color={tintColor} />
+          tabBarIcon: ({ tintColor }) => (
+            <Ionicons name="ios-home" size={24} color={tintColor} />
+          )
         }
       },
       Message: {
         screen: MessageScreen,
         navigationOptions: {
-          tabBarIcon: ({ tintColor }) => <Ionicons name="ios-chatboxes" size={24} color={tintColor} />
+          tabBarIcon: ({ tintColor }) => (
+            <Ionicons name="ios-chatboxes" size={24} color={tintColor} />
+          )
         }
       },
       Post: {
@@ -51,21 +55,25 @@ const AppContainer =　createStackNavigator(
       Notification: {
         screen: NotificationScreen,
         navigationOptions: {
-          tabBarIcon: ({ tintColor }) => <Ionicons name="ios-notifications" size={24} color={tintColor} />
+          tabBarIcon: ({ tintColor }) => (
+            <Ionicons name="ios-notifications" size={24} color={tintColor} />
+          )
         }
       },
       Profile: {
         screen: ProfileScreen,
         navigationOptions: {
-          tabBarIcon: ({ tintColor }) => <Ionicons name="ios-person" size={24} color={tintColor} />
+          tabBarIcon: ({ tintColor }) => (
+            <Ionicons name="ios-person" size={24} color={tintColor} />
+          )
         }
       }
     },
     {
       defaultNavigationOptions: {
-        tabBarOnPress: ({navgation, defaultHandler}) => {
-          if(navgation.state.key === "Post"){
-            navgation.navigate("postModal")
+        tabBarOnPress: ({navigation, defaultHandler}) => {
+          if(navigation.state.key === "Post"){
+            navigation.navigate("postModal")
           } else {
             defaultHandler()
           }
