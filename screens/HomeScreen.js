@@ -1,33 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, LayoutAnimation } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
-import * as firebase from 'firebase'
+import { Ionicon } from "@expo/vector-icons"
 
 export default class HomeScreen extends React.Component {
-  state = {
-    email:  "",
-    displayName: ""
-  };
-
-  componentDidMount() {
-    const {email, displayName} = firebase.auth().currentUser;
-
-    this.setState({email, displayName});
-  };
-
-  signOutUser = () => {
-    firebase.auth().signOut();
-  };
-
-
+  renderPost = post => {
+    return (
+      <View>
+        <Text>I am a post</Text>
+      </View>
+    )
+  }
   render() {
-    LayoutAnimation.easeInEaseOut();
       return (
           <View style={styles.container}>
-            <Text>Hi {this.state.email}!</Text>
-            <TouchableOpacity style={{marginTop: 32}} onPress={this.signOutUser}>
-              <Text>Logout</Text>
-            </TouchableOpacity>
+            <View style={styles.header}>
+              <Text style={styles.headerTitle}>Feed</Text>
+            </View>
           </View>
         );
   }
@@ -36,7 +25,20 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#EFECF4"
   },
+  header: {
+    paddingTop: 64,
+    paddingBottom: 16,
+    backgroundColor: "#FFF",
+    alignItems: "center",
+    justifyContent: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: "#EBECF4",
+    shadowColor: "#454D65",
+    shadowOffset: { height: 5 },
+    shadowRadius: 15,
+    shadowOpacity: 0.2,
+    zIndex: 10
+  }
 });
