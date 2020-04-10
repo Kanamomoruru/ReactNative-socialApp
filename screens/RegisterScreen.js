@@ -22,17 +22,17 @@ export default class RegisterScreen extends React.Component {
 
     handlePickAvatar = async () => {
       UserPermissions.getCameraPermission();
-
+  
       let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [4, 3]
       });
-
-      if(!result.cancelled) {
-        this.setState({ user: { ...this.state.user, avatar: result.uri }})
+  
+      if (!result.cancelled) {
+        this.setState({ user: { ...this.state.user, avatar: result.uri } });
       }
-    }
+    };
 
     handleSignUp = () => {
       Fire.shared.createUser(this.state.user)

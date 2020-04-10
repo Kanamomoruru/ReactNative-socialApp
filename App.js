@@ -98,12 +98,9 @@ const AppContainer =　createStackNavigator(
 
 
 const AuthStack = createStackNavigator({
-  Login: LoginScreen,
-  Register: RegisterScreen
-},
-{
-  initialRouteName: "Register"
-});
+    Login: LoginScreen,
+    Register: RegisterScreen
+ });
 
 export default createAppContainer(
   createSwitchNavigator(
